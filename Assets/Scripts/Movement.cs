@@ -10,13 +10,17 @@ public class Movement : MonoBehaviour
     [SerializeField] private float iceSpeedMultiplier = 1.5f;
     [SerializeField] private float wallSlideSpeed = 2f;
     [SerializeField] private float wallJumpForce = 15f;
+    [SerializeField] private float speedIncreasePerSecond = 0.5f;
+
+    [Header("Velocidad Máxima")]
+    [SerializeField] private float maxSpeed = 20f; // NUEVO: velocidad tope
 
     private float currentSpeed;
+    private float IncreaseSpeed;
     private bool onIceFloor = false;
     private bool isTouchingWall = false;
     private bool isWallSliding = false;
     private bool jump;
-
     private Rigidbody2D rb;
 
     void Start()
@@ -31,22 +35,24 @@ public class Movement : MonoBehaviour
         {
             jump = true;
         }
-
         CheckWallSliding();
     }
 
     void FixedUpdate()
     {
-        float speed = onIceFloor ? baseSpeed * iceSpeedMultiplier : currentSpeed;
+        // Incrementar velocidad pero con límite
+        currentSpeed += speedIncreasePerSecond * Time.fixedDeltaTime;
+        currentSpeed = Mathf.Min(currentSpeed, maxSpeed); // NUEVO: clampeamos al máximo
+
+        float speedTotal = onIceFloor ? currentSpeed * iceSpeedMultiplier : currentSpeed;
 
         // Movimiento constante hacia la derecha
-        rb.linearVelocity = new Vector2(speed, rb.linearVelocity.y);
+        rb.linearVelocity = new Vector2(speedTotal, rb.linearVelocity.y);
 
         if (jump && isWallSliding)
         {
             WallJump();
         }
-
         jump = false;
     }
 
@@ -73,7 +79,6 @@ public class Movement : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("iceFloor"))
             onIceFloor = true;
-
         if (collision.gameObject.CompareTag("Wall"))
             isTouchingWall = true;
     }
@@ -82,7 +87,6 @@ public class Movement : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("iceFloor"))
             onIceFloor = false;
-
         if (collision.gameObject.CompareTag("Wall"))
             isTouchingWall = false;
     }

@@ -1,65 +1,119 @@
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerMask))]
 public class PlayerControls : MonoBehaviour
 {
-    private PlayerMask pm;
+    [Header("Configuración de Máscaras")]
+    [Tooltip("Número total de máscaras disponibles (sin contar None)")]
+    public int totalMasks = 3;
+    [Tooltip("Índice de la máscara inicial (0 = Mask1, 1 = Mask2, 2 = Mask3)")]
+    public int startMaskIndex = 0;
 
-    private void Awake()
+    private int currentMaskIndex = 0;
+    private PlayerMask playerMask;
+    private MaskSelector maskSelector; // NUEVO
+
+    void Start()
     {
-        pm = GetComponent<PlayerMask>();
-        if (pm == null)
+        // Obtenemos el componente PlayerMask
+        playerMask = GetComponent<PlayerMask>();
+        if (playerMask == null)
         {
-            Debug.LogWarning("[PlayerControls] No se encontró PlayerMask en el GameObject.");
-        }
-    }
-
-    private void Update()
-    {
-        // Flecha izquierda -> Mask1
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            SetMask(MaskType.Mask1);
-        }
-
-        // Flecha abajo -> Mask2
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            SetMask(MaskType.Mask2);
-        }
-
-        // Flecha derecha -> Mask3
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            SetMask(MaskType.Mask3);
-        }
-
-        // (Opcional) Flecha arriba -> quitar máscara
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            RemoveMask();
-        }
-    }
-
-    private void SetMask(MaskType mask)
-    {
-        if (pm == null) return;
-
-        if (pm.currentMask == mask)
-        {
-            Debug.Log($"[PlayerControls] Ya tenés la {mask}");
+            Debug.LogError("[PlayerControls] No se encontró el componente PlayerMask en el jugador!");
             return;
         }
 
-        pm.EquipMask(mask);
-        Debug.Log($"[PlayerControls] Mascara cambiada a {mask}");
+        // Obtenemos el MaskSelector de la UI - NUEVO
+        maskSelector = FindFirstObjectByType<MaskSelector>();
+
+        // Validamos que haya al menos una máscara
+        if (totalMasks < 1)
+        {
+            Debug.LogError("[PlayerControls] Debe haber al menos 1 máscara. Ajustando a 1.");
+            totalMasks = 1;
+        }
+
+        // Aseguramos que el índice inicial esté en rango válido
+        currentMaskIndex = Mathf.Clamp(startMaskIndex, 0, totalMasks - 1);
+
+        // Equipamos la máscara inicial
+        EquipCurrentMask();
     }
 
-    private void RemoveMask()
+    void Update()
     {
-        if (pm == null) return;
+        // Flecha izquierda -> máscara anterior (con wrap-around)
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            PreviousMask();
+        }
+        // Flecha derecha -> máscara siguiente (con wrap-around)
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            NextMask();
+        }
+    }
 
-        pm.RemoveMask();
-        Debug.Log("[PlayerControls] Máscara quitada (None)");
+    public void NextMask()
+    {
+        currentMaskIndex = (currentMaskIndex + 1) % totalMasks;
+        EquipCurrentMask();
+        NotifyUI(); // NUEVO
+    }
+
+    public void PreviousMask()
+    {
+        currentMaskIndex = (currentMaskIndex - 1 + totalMasks) % totalMasks;
+        EquipCurrentMask();
+        NotifyUI(); // NUEVO
+    }
+
+    private void EquipCurrentMask()
+    {
+        if (playerMask == null) return;
+
+        // Convertimos el índice (0, 1, 2) al MaskType correspondiente (Mask1, Mask2, Mask3)
+        MaskType maskToEquip = (MaskType)(currentMaskIndex + 1);
+        playerMask.EquipMask(maskToEquip);
+
+        Debug.Log($"[PlayerControls] Máscara cambiada a índice {currentMaskIndex} -> {maskToEquip}");
+    }
+
+    // NUEVO: Notificar al UI cuando cambia la máscara
+    private void NotifyUI()
+    {
+        if (maskSelector != null)
+        {
+            maskSelector.ForceUpdateVisuals();
+        }
+    }
+
+    // Métodos públicos para que otros scripts puedan consultar/modificar la máscara
+    public int GetCurrentMaskIndex()
+    {
+        return currentMaskIndex;
+    }
+
+    public MaskType GetCurrentMaskType()
+    {
+        return playerMask != null ? playerMask.currentMask : MaskType.None;
+    }
+
+    public void SetMask(int index)
+    {
+        if (index >= 0 && index < totalMasks)
+        {
+            currentMaskIndex = index;
+            EquipCurrentMask();
+            NotifyUI(); // NUEVO
+        }
+        else
+        {
+            Debug.LogWarning($"[PlayerControls] Índice de máscara inválido: {index}");
+        }
+    }
+
+    public int GetTotalMasks()
+    {
+        return totalMasks;
     }
 }
