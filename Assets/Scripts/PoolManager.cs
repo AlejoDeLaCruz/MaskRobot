@@ -1,61 +1,57 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// Pool simple que guarda instancias por "prefab key" (usamos el prefab como key).
 public class PoolManager : MonoBehaviour
 {
-    public static PoolManager Instance { get; private set; }
-
-    // Diccionario: prefab -> stack de instancias
-    private Dictionary<GameObject, Stack<GameObject>> pool = new Dictionary<GameObject, Stack<GameObject>>();
-
-    private void Awake()
+    [System.Serializable]
+    public class PoolDef
     {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
+        public string name;
+        public GameObject prefab;
+        public int size = 5;
     }
 
-    // Obtiene una instancia (si no hay crea una nueva)
-    public GameObject Get(GameObject prefab, Vector3 position, Quaternion rotation)
+    public PoolDef[] pools;
+    private Dictionary<int, Queue<GameObject>> poolDict = new Dictionary<int, Queue<GameObject>>();
+
+    void Awake()
     {
-        if (!pool.ContainsKey(prefab)) pool[prefab] = new Stack<GameObject>();
-
-        var stack = pool[prefab];
-        GameObject go;
-        if (stack.Count > 0)
+        for (int i = 0; i < pools.Length; i++)
         {
-            go = stack.Pop();
-            go.transform.position = position;
-            go.transform.rotation = rotation;
-            go.SetActive(true);
+            var q = new Queue<GameObject>();
+            var container = new GameObject(pools[i].name + "_Pool");
+            container.transform.SetParent(transform);
+            for (int j = 0; j < pools[i].size; j++)
+            {
+                var obj = Instantiate(pools[i].prefab, container.transform);
+                obj.SetActive(false);
+                q.Enqueue(obj);
+            }
+            poolDict[i] = q;
         }
-        else
-        {
-            go = Instantiate(prefab, position, rotation);
-            // Añadimos componente para saber a qué prefab pertenece (útil para devolverlo)
-            var info = go.GetComponent<PooledObject>();
-            if (info == null) info = go.AddComponent<PooledObject>();
-            info.originalPrefab = prefab;
-        }
-
-        return go;
     }
 
-    // Devuelve al pool (desactiva)
-    public void Release(GameObject go)
+    public GameObject Spawn(int prefabIndex)
     {
-        if (go == null) return;
-        var info = go.GetComponent<PooledObject>();
-        if (info == null || info.originalPrefab == null)
+        if (!poolDict.ContainsKey(prefabIndex))
         {
-            Destroy(go); // no sabemos a qué pool va: destruyelo
-            return;
+            Debug.LogError("Pool no existe index: " + prefabIndex);
+            return null;
         }
 
+        var q = poolDict[prefabIndex];
+        var obj = q.Dequeue();
+        obj.SetActive(true);
+        q.Enqueue(obj);
+        // Lo dejamos activo y sin parent (o podés parentearlo donde quieras)
+        obj.transform.SetParent(null);
+        return obj;
+    }
+
+    public void Despawn(GameObject go)
+    {
+        // Desactivar y devolver al pool (lo ponemos como hijo del pool correspondiente si encontramos el prefab)
         go.SetActive(false);
-        // opcional: resetear transform, variables, etc.
-
-        if (!pool.ContainsKey(info.originalPrefab)) pool[info.originalPrefab] = new Stack<GameObject>();
-        pool[info.originalPrefab].Push(go);
+        // Opcional: reparentear a algun container; este ejemplo no lo hace automáticamente
     }
 }
