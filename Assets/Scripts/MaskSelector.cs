@@ -16,6 +16,12 @@ public class MaskSelector : MonoBehaviour
     public float selectedScale = 1.3f;    // Escala cuando está seleccionado (más grande)
     public float deselectedScale = 0.8f;  // Escala cuando NO está seleccionado (más chico)
 
+    [Header("Atenuado para NO seleccionado")]
+    [Range(0f, 1f)]
+    public float deselectedAlpha = 0.6f;     // Alpha que tendrán los no seleccionados (0 = completamente transparente, 1 = opaco)
+    [Range(0f, 1f)]
+    public float desaturateAmount = 0.5f;    // Cuánto se mezcla con gris (0 = color original, 1 = totalmente gris)
+
     private Image[] squares;
     private Color[] originalColors;
     private PlayerControls playerControls;
@@ -25,7 +31,7 @@ public class MaskSelector : MonoBehaviour
         // Guardamos los cuadrados en orden lógico: 0=azul, 1=verde, 2=rojo
         squares = new Image[] { centerSquare, rightSquare, leftSquare };
 
-        // Guardamos los colores originales de cada sprite
+        // Guardamos los colores originales de cada sprite (incluye alpha original)
         originalColors = new Color[squares.Length];
         for (int i = 0; i < squares.Length; i++)
         {
@@ -48,8 +54,6 @@ public class MaskSelector : MonoBehaviour
 
     void Update()
     {
-        // REMOVIDO: Ya no detectamos input aquí, lo hace PlayerControls
-        // Solo actualizamos los visuales basándonos en el estado del PlayerControls
         if (playerControls != null)
         {
             UpdateVisuals();
@@ -62,25 +66,33 @@ public class MaskSelector : MonoBehaviour
 
         int currentIndex = playerControls.GetCurrentMaskIndex();
 
-        // Actualizamos SOLO la escala de todos los cuadrados
         for (int i = 0; i < squares.Length; i++)
         {
             if (squares[i] == null) continue;
 
-            // Restauramos el color original del sprite
-            squares[i].color = originalColors[i];
+            // Determinamos el color objetivo
+            Color targetColor = originalColors[i];
 
-            // Cambiamos solo la escala
             if (i == currentIndex)
             {
-                // Este es el seleccionado - más grande
+                // Seleccionado: restauramos color y alpha original (puedes forzar alpha a 1 si querés)
+                targetColor = originalColors[i];
+                targetColor.a = originalColors[i].a; // mantiene el alpha original
                 squares[i].transform.localScale = Vector3.one * selectedScale;
             }
             else
             {
-                // No está seleccionado - más chico
+                // No seleccionado: lo atenuamos -> mezclamos con gris y reducimos alpha
+                Color grayVersion = Color.Lerp(originalColors[i], Color.gray, desaturateAmount);
+                // Aplicamos alpha deseado multiplicando por el alpha original para respetar transparencia base
+                grayVersion.a = originalColors[i].a * deselectedAlpha;
+                targetColor = grayVersion;
+
                 squares[i].transform.localScale = Vector3.one * deselectedScale;
             }
+
+            // Asignamos el color calculado
+            squares[i].color = targetColor;
         }
 
         UpdateArrows();
