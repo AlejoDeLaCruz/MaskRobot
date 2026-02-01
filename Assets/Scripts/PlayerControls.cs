@@ -8,9 +8,17 @@ public class PlayerControls : MonoBehaviour
     [Tooltip("Índice de la máscara inicial (0 = Mask1, 1 = Mask2, 2 = Mask3)")]
     public int startMaskIndex = 0;
 
+    [Header("Audio")]
+    [Tooltip("Clip de audio que se reproduce al cambiar de máscara")]
+    public AudioClip maskChangeSound;
+    [Tooltip("Volumen del sonido (0.0 a 1.0)")]
+    [Range(0f, 1f)]
+    public float soundVolume = 1f;
+
     private int currentMaskIndex = 0;
     private PlayerMask playerMask;
-    private MaskSelector maskSelector; // NUEVO
+    private MaskSelector maskSelector;
+    private AudioSource audioSource;
 
     void Start()
     {
@@ -22,8 +30,11 @@ public class PlayerControls : MonoBehaviour
             return;
         }
 
-        // Obtenemos el MaskSelector de la UI - NUEVO
+        // Obtenemos el MaskSelector de la UI
         maskSelector = FindFirstObjectByType<MaskSelector>();
+
+        // Configuramos el AudioSource
+        SetupAudioSource();
 
         // Validamos que haya al menos una máscara
         if (totalMasks < 1)
@@ -35,8 +46,8 @@ public class PlayerControls : MonoBehaviour
         // Aseguramos que el índice inicial esté en rango válido
         currentMaskIndex = Mathf.Clamp(startMaskIndex, 0, totalMasks - 1);
 
-        // Equipamos la máscara inicial
-        EquipCurrentMask();
+        // Equipamos la máscara inicial (sin sonido)
+        EquipCurrentMask(false);
     }
 
     void Update()
@@ -53,21 +64,45 @@ public class PlayerControls : MonoBehaviour
         }
     }
 
+    private void SetupAudioSource()
+    {
+        // Buscamos si ya hay un AudioSource
+        audioSource = GetComponent<AudioSource>();
+
+        // Si no existe, lo creamos
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+
+        // Configuramos el AudioSource
+        audioSource.playOnAwake = false;
+        audioSource.loop = false;
+    }
+
+    private void PlayMaskChangeSound()
+    {
+        if (audioSource != null && maskChangeSound != null)
+        {
+            audioSource.PlayOneShot(maskChangeSound, soundVolume);
+        }
+    }
+
     public void NextMask()
     {
         currentMaskIndex = (currentMaskIndex + 1) % totalMasks;
-        EquipCurrentMask();
-        NotifyUI(); // NUEVO
+        EquipCurrentMask(true);
+        NotifyUI();
     }
 
     public void PreviousMask()
     {
         currentMaskIndex = (currentMaskIndex - 1 + totalMasks) % totalMasks;
-        EquipCurrentMask();
-        NotifyUI(); // NUEVO
+        EquipCurrentMask(true);
+        NotifyUI();
     }
 
-    private void EquipCurrentMask()
+    private void EquipCurrentMask(bool playSound = true)
     {
         if (playerMask == null) return;
 
@@ -75,10 +110,15 @@ public class PlayerControls : MonoBehaviour
         MaskType maskToEquip = (MaskType)(currentMaskIndex + 1);
         playerMask.EquipMask(maskToEquip);
 
+        // Reproducimos el sonido si está habilitado
+        if (playSound)
+        {
+            PlayMaskChangeSound();
+        }
+
         Debug.Log($"[PlayerControls] Máscara cambiada a índice {currentMaskIndex} -> {maskToEquip}");
     }
 
-    // NUEVO: Notificar al UI cuando cambia la máscara
     private void NotifyUI()
     {
         if (maskSelector != null)
@@ -87,7 +127,7 @@ public class PlayerControls : MonoBehaviour
         }
     }
 
-    // Métodos públicos para que otros scripts puedan consultar/modificar la máscara
+    // Métodos públicos
     public int GetCurrentMaskIndex()
     {
         return currentMaskIndex;
@@ -98,13 +138,13 @@ public class PlayerControls : MonoBehaviour
         return playerMask != null ? playerMask.currentMask : MaskType.None;
     }
 
-    public void SetMask(int index)
+    public void SetMask(int index, bool playSound = true)
     {
         if (index >= 0 && index < totalMasks)
         {
             currentMaskIndex = index;
-            EquipCurrentMask();
-            NotifyUI(); // NUEVO
+            EquipCurrentMask(playSound);
+            NotifyUI();
         }
         else
         {
