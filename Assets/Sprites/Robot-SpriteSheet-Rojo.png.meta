@@ -1,64 +1,64 @@
 fileFormatVersion: 2
-guid: db70f081fde379e41abad13433b53442
+guid: 5eff7adb7c8749e4ab1a01688c445bdf
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1855560452088881357
-    second: Robot-SpriteSheet-verde_0
+      213: -5583591340625067147
+    second: Robot-SpriteSheet-Rojo_0
   - first:
-      213: -9131028340107050536
-    second: Robot-SpriteSheet-verde_1
+      213: -6492980890500157078
+    second: Robot-SpriteSheet-Rojo_1
   - first:
-      213: 6606881931081648300
-    second: Robot-SpriteSheet-verde_2
+      213: 7360475505552965185
+    second: Robot-SpriteSheet-Rojo_2
   - first:
-      213: 8959743166836803443
-    second: Robot-SpriteSheet-verde_3
+      213: 957295640959534635
+    second: Robot-SpriteSheet-Rojo_3
   - first:
-      213: -7398176635289733625
-    second: Robot-SpriteSheet-verde_4
+      213: 4074994061184286213
+    second: Robot-SpriteSheet-Rojo_4
   - first:
-      213: -1693224397492004560
-    second: Robot-SpriteSheet-verde_5
+      213: -1059328962393043238
+    second: Robot-SpriteSheet-Rojo_5
   - first:
-      213: 2911444999230005239
-    second: Robot-SpriteSheet-verde_6
+      213: -9109998563018201605
+    second: Robot-SpriteSheet-Rojo_6
   - first:
-      213: 939481232204068195
-    second: Robot-SpriteSheet-verde_7
+      213: -4086639009762593574
+    second: Robot-SpriteSheet-Rojo_7
   - first:
-      213: 9186600635052780023
-    second: Robot-SpriteSheet-verde_8
+      213: 493256917306753040
+    second: Robot-SpriteSheet-Rojo_8
   - first:
-      213: -8290656119314628506
-    second: Robot-SpriteSheet-verde_9
+      213: -1404022572468469378
+    second: Robot-SpriteSheet-Rojo_9
   - first:
-      213: 4233191818202948820
-    second: Robot-SpriteSheet-verde_10
+      213: -8678367676803379446
+    second: Robot-SpriteSheet-Rojo_10
   - first:
-      213: -6232434370707129897
-    second: Robot-SpriteSheet-verde_11
+      213: -8352786934815748909
+    second: Robot-SpriteSheet-Rojo_11
   - first:
-      213: -8787365239282979520
-    second: Robot-SpriteSheet-verde_12
+      213: -3080894921135976412
+    second: Robot-SpriteSheet-Rojo_12
   - first:
-      213: -8807301613427787797
-    second: Robot-SpriteSheet-verde_13
+      213: -2417470639834914477
+    second: Robot-SpriteSheet-Rojo_13
   - first:
-      213: 8121964701102256459
-    second: Robot-SpriteSheet-verde_14
+      213: 4053341512932987828
+    second: Robot-SpriteSheet-Rojo_14
   - first:
-      213: -3607845056499567984
-    second: Robot-SpriteSheet-verde_15
+      213: 1402832304595084048
+    second: Robot-SpriteSheet-Rojo_15
   - first:
-      213: 5406473207784552283
-    second: Robot-SpriteSheet-verde_16
+      213: -8085789548911786799
+    second: Robot-SpriteSheet-Rojo_16
   - first:
-      213: -2315261880587741829
-    second: Robot-SpriteSheet-verde_17
+      213: 4159164156959505842
+    second: Robot-SpriteSheet-Rojo_17
   - first:
-      213: 7349358952012378571
-    second: Robot-SpriteSheet-verde_18
+      213: 2853067954568065672
+    second: Robot-SpriteSheet-Rojo_18
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -154,7 +154,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Robot-SpriteSheet-verde_0
+      name: Robot-SpriteSheet-Rojo_0
       rect:
         serializedVersion: 2
         x: 0
@@ -167,16 +167,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 12422133138f3454ca341b4b72ecfcc6
-      internalID: -213701401
+      spriteID: 573881342491382b0800000000000000
+      internalID: -5583591340625067147
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Robot-SpriteSheet-verde_1
+      name: Robot-SpriteSheet-Rojo_1
       rect:
         serializedVersion: 2
         x: 847
@@ -189,16 +189,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: c9520b1a3dad8fe43b3b30b1f5d3d26a
-      internalID: 1808043871
+      spriteID: a61b658084c44e5a0800000000000000
+      internalID: -6492980890500157078
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Robot-SpriteSheet-verde_2
+      name: Robot-SpriteSheet-Rojo_2
       rect:
         serializedVersion: 2
         x: 1694
@@ -211,16 +211,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: d779642984a96e641988aa67fa8835dc
-      internalID: -1251779725
+      spriteID: 14eb27e8979a52660800000000000000
+      internalID: 7360475505552965185
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Robot-SpriteSheet-verde_3
+      name: Robot-SpriteSheet-Rojo_3
       rect:
         serializedVersion: 2
         x: 2541
@@ -233,16 +233,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: cccc1ee4935f7de4f8572dbdd75a508c
-      internalID: -1948814805
+      spriteID: b264c60405ff84d00800000000000000
+      internalID: 957295640959534635
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Robot-SpriteSheet-verde_4
+      name: Robot-SpriteSheet-Rojo_4
       rect:
         serializedVersion: 2
         x: 3388
@@ -255,16 +255,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 7a8c04a67c8f2344cabce22a06678c1d
-      internalID: 702161472
+      spriteID: 50e37b622894d8830800000000000000
+      internalID: 4074994061184286213
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Robot-SpriteSheet-verde_5
+      name: Robot-SpriteSheet-Rojo_5
       rect:
         serializedVersion: 2
         x: 0
@@ -277,16 +277,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: f1e55c5f4616b4b408901009e6db9fc5
-      internalID: -1871098271
+      spriteID: ade8748dbe18c41f0800000000000000
+      internalID: -1059328962393043238
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Robot-SpriteSheet-verde_6
+      name: Robot-SpriteSheet-Rojo_6
       rect:
         serializedVersion: 2
         x: 847
@@ -299,16 +299,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 003a316891e16f147aac132c611f1a6f
-      internalID: -65604116
+      spriteID: bf52bf2e298c29180800000000000000
+      internalID: -9109998563018201605
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Robot-SpriteSheet-verde_7
+      name: Robot-SpriteSheet-Rojo_7
       rect:
         serializedVersion: 2
         x: 1694
@@ -321,16 +321,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 29ded711908f42843b4a82ac3af25b01
-      internalID: -1604003065
+      spriteID: ad4b8d9f8775947c0800000000000000
+      internalID: -4086639009762593574
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Robot-SpriteSheet-verde_8
+      name: Robot-SpriteSheet-Rojo_8
       rect:
         serializedVersion: 2
         x: 2541
@@ -343,16 +343,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 537f2bbe4f6c8eb4db1d766eff68947d
-      internalID: 1938009331
+      spriteID: 010c21b8d8668d600800000000000000
+      internalID: 493256917306753040
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Robot-SpriteSheet-verde_9
+      name: Robot-SpriteSheet-Rojo_9
       rect:
         serializedVersion: 2
         x: 3388
@@ -365,16 +365,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: d75becff62cc3904c958e2f4242dd53f
-      internalID: 248988897
+      spriteID: e71036fb8e8e38ce0800000000000000
+      internalID: -1404022572468469378
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Robot-SpriteSheet-verde_10
+      name: Robot-SpriteSheet-Rojo_10
       rect:
         serializedVersion: 2
         x: 0
@@ -387,16 +387,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 7d3328a869d30f74092b0d065d75e6c8
-      internalID: 1692777824
+      spriteID: a0f07e1f39e309780800000000000000
+      internalID: -8678367676803379446
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Robot-SpriteSheet-verde_11
+      name: Robot-SpriteSheet-Rojo_11
       rect:
         serializedVersion: 2
         x: 847
@@ -409,16 +409,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 08ee97328f9fd7b44a7b1c2cf06c46e8
-      internalID: 1505171843
+      spriteID: 3dc88c9a980f41c80800000000000000
+      internalID: -8352786934815748909
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Robot-SpriteSheet-verde_12
+      name: Robot-SpriteSheet-Rojo_12
       rect:
         serializedVersion: 2
         x: 1694
@@ -431,16 +431,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 0c2d8349d134808449c4b2758cc0b5dc
-      internalID: -974705919
+      spriteID: 420926b74667e35d0800000000000000
+      internalID: -3080894921135976412
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Robot-SpriteSheet-verde_13
+      name: Robot-SpriteSheet-Rojo_13
       rect:
         serializedVersion: 2
         x: 2541
@@ -453,16 +453,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 9d70720b3e09c534da103ccd7906be89
-      internalID: -1410869328
+      spriteID: 35124b9e24b637ed0800000000000000
+      internalID: -2417470639834914477
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Robot-SpriteSheet-verde_14
+      name: Robot-SpriteSheet-Rojo_14
       rect:
         serializedVersion: 2
         x: 3388
@@ -475,16 +475,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 44de322e385b0ea4aa10126fc449e957
-      internalID: -1921790751
+      spriteID: 4b317b761ac504830800000000000000
+      internalID: 4053341512932987828
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Robot-SpriteSheet-verde_15
+      name: Robot-SpriteSheet-Rojo_15
       rect:
         serializedVersion: 2
         x: 0
@@ -497,16 +497,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 743ecc76770790f44ab32ac7418d8c04
-      internalID: -39199252
+      spriteID: 01325da6c8cd77310800000000000000
+      internalID: 1402832304595084048
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Robot-SpriteSheet-verde_16
+      name: Robot-SpriteSheet-Rojo_16
       rect:
         serializedVersion: 2
         x: 847
@@ -519,16 +519,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 5a4d223f24fbb2e4783d10916da5756a
-      internalID: -447768426
+      spriteID: 1d40c80ee3189cf80800000000000000
+      internalID: -8085789548911786799
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Robot-SpriteSheet-verde_17
+      name: Robot-SpriteSheet-Rojo_17
       rect:
         serializedVersion: 2
         x: 1694
@@ -541,16 +541,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: aef5e1b27c8d98b46bf97f4084f52494
-      internalID: 297931043
+      spriteID: 2bdbb1ab3c158b930800000000000000
+      internalID: 4159164156959505842
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Robot-SpriteSheet-verde_18
+      name: Robot-SpriteSheet-Rojo_18
       rect:
         serializedVersion: 2
         x: 2541
@@ -563,10 +563,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 418ae1c0fb2c67f49abed40478b9160d
-      internalID: 662012377
+      spriteID: 88274104032289720800000000000000
+      internalID: 2853067954568065672
       vertices: []
       indices: 
       edges: []
@@ -575,7 +575,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: e0d754fd2b7d7e449bbae9176c80e940
+    spriteID: bd98cf96e30e8c14ca562ac3e6d1bb6f
     internalID: 0
     vertices: []
     indices: 
@@ -585,25 +585,25 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Robot-SpriteSheet-verde_0: -213701401
-      Robot-SpriteSheet-verde_1: 1808043871
-      Robot-SpriteSheet-verde_10: 1692777824
-      Robot-SpriteSheet-verde_11: 1505171843
-      Robot-SpriteSheet-verde_12: -974705919
-      Robot-SpriteSheet-verde_13: -1410869328
-      Robot-SpriteSheet-verde_14: -1921790751
-      Robot-SpriteSheet-verde_15: -39199252
-      Robot-SpriteSheet-verde_16: -447768426
-      Robot-SpriteSheet-verde_17: 297931043
-      Robot-SpriteSheet-verde_18: 662012377
-      Robot-SpriteSheet-verde_2: -1251779725
-      Robot-SpriteSheet-verde_3: -1948814805
-      Robot-SpriteSheet-verde_4: 702161472
-      Robot-SpriteSheet-verde_5: -1871098271
-      Robot-SpriteSheet-verde_6: -65604116
-      Robot-SpriteSheet-verde_7: -1604003065
-      Robot-SpriteSheet-verde_8: 1938009331
-      Robot-SpriteSheet-verde_9: 248988897
+      Robot-SpriteSheet-Rojo_0: -5583591340625067147
+      Robot-SpriteSheet-Rojo_1: -6492980890500157078
+      Robot-SpriteSheet-Rojo_10: -8678367676803379446
+      Robot-SpriteSheet-Rojo_11: -8352786934815748909
+      Robot-SpriteSheet-Rojo_12: -3080894921135976412
+      Robot-SpriteSheet-Rojo_13: -2417470639834914477
+      Robot-SpriteSheet-Rojo_14: 4053341512932987828
+      Robot-SpriteSheet-Rojo_15: 1402832304595084048
+      Robot-SpriteSheet-Rojo_16: -8085789548911786799
+      Robot-SpriteSheet-Rojo_17: 4159164156959505842
+      Robot-SpriteSheet-Rojo_18: 2853067954568065672
+      Robot-SpriteSheet-Rojo_2: 7360475505552965185
+      Robot-SpriteSheet-Rojo_3: 957295640959534635
+      Robot-SpriteSheet-Rojo_4: 4074994061184286213
+      Robot-SpriteSheet-Rojo_5: -1059328962393043238
+      Robot-SpriteSheet-Rojo_6: -9109998563018201605
+      Robot-SpriteSheet-Rojo_7: -4086639009762593574
+      Robot-SpriteSheet-Rojo_8: 493256917306753040
+      Robot-SpriteSheet-Rojo_9: -1404022572468469378
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

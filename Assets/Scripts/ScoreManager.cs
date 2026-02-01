@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -8,8 +9,10 @@ public class ScoreManager : MonoBehaviour
     public float pointsPerSecond = 1f;
     public string playerPrefsKey = "HighScore";
 
-    [HideInInspector] public TMPro.TextMeshProUGUI currentTMP;
-    [HideInInspector] public TMPro.TextMeshProUGUI bestTMP;
+    [HideInInspector]
+    public TMPro.TextMeshProUGUI currentTMP;
+    [HideInInspector]
+    public TMPro.TextMeshProUGUI bestTMP;
 
     private float currentScore;
     private int bestScore;
@@ -29,10 +32,31 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Reiniciar el juego cuando se recarga la escena
+        ResetRun();
+
+        // Buscar y reconectar las referencias UI después de cargar la escena
+        FindUIReferences();
+        UpdateUI();
+    }
+
     private void Start()
     {
         LoadBest();
         ResetRun();
+        FindUIReferences();
     }
 
     private void Update()
@@ -43,15 +67,28 @@ public class ScoreManager : MonoBehaviour
         UpdateUI();
     }
 
+    void FindUIReferences()
+    {
+        // Buscar los TextMeshPro por nombre o tag
+        GameObject currentObj = GameObject.Find("CurrentScoreText");
+        GameObject bestObj = GameObject.Find("BestScoreText");
+
+        if (currentObj != null)
+            currentTMP = currentObj.GetComponent<TMPro.TextMeshProUGUI>();
+
+        if (bestObj != null)
+            bestTMP = bestObj.GetComponent<TMPro.TextMeshProUGUI>();
+    }
+
     void UpdateUI()
     {
         int scoreInt = Mathf.FloorToInt(currentScore);
 
         if (currentTMP != null)
-            currentTMP.text = $"Score: {scoreInt}";
+            currentTMP.text = $"{scoreInt}";
 
         if (bestTMP != null)
-            bestTMP.text = $"Record: {bestScore}";
+            bestTMP.text = $"{bestScore}";
     }
 
     public void GameOver()
@@ -76,7 +113,6 @@ public class ScoreManager : MonoBehaviour
     void TrySaveBest()
     {
         int scoreInt = Mathf.FloorToInt(currentScore);
-
         if (scoreInt > bestScore)
         {
             bestScore = scoreInt;
@@ -95,6 +131,13 @@ public class ScoreManager : MonoBehaviour
     {
         PlayerPrefs.DeleteKey(playerPrefsKey);
         bestScore = 0;
+        UpdateUI();
+    }
+
+    public void SetUIReferences(TMPro.TextMeshProUGUI current, TMPro.TextMeshProUGUI best)
+    {
+        currentTMP = current;
+        bestTMP = best;
         UpdateUI();
     }
 }

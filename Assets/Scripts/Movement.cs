@@ -1,27 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using UnityEngine;
-using UnityEngine.UI;
+ï»¿using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    [SerializeField] private float baseSpeed = 4f;
-    [SerializeField] private float iceSpeedMultiplier = 1.5f;
+    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private float baseSpeed = 1.5f;
     [SerializeField] private float wallSlideSpeed = 2f;
     [SerializeField] private float wallJumpForce = 15f;
-    [SerializeField] private float speedIncreasePerSecond = 0.5f;
+    [SerializeField] private float iceSpeedMultiplier = 1.5f;
+    [SerializeField] private float speedIncreasePerSecond = 0.12f;
 
-    [Header("Velocidad Máxima")]
-    [SerializeField] private float maxSpeed = 20f; // NUEVO: velocidad tope
+    [Header("Velocidad mÃ¡xima")]
+    [SerializeField] private float maxSpeed = 8f;
+
+    private bool jump = false;
+    private bool onIceFloor = false;
+    private bool isWallSliding = false;
+    private bool isTouchingWall = false;
 
     private float currentSpeed;
-    private float IncreaseSpeed;
-    private bool onIceFloor = false;
-    private bool isTouchingWall = false;
-    private bool isWallSliding = false;
-    private bool jump;
-    private Rigidbody2D rb;
+    private float cronometro = 0f;
 
     void Start()
     {
@@ -31,28 +28,36 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Jump"))
+        cronometro += Time.deltaTime;
+
+        if (cronometro > 30f && cronometro < 30.2f)
         {
-            jump = true;
+            currentSpeed += 0.025f;
+            speedIncreasePerSecond += 0.2f;
         }
+
+        if (Input.GetButtonDown("Jump"))
+            jump = true;
+
         CheckWallSliding();
     }
 
     void FixedUpdate()
     {
-        // Incrementar velocidad pero con límite
         currentSpeed += speedIncreasePerSecond * Time.fixedDeltaTime;
-        currentSpeed = Mathf.Min(currentSpeed, maxSpeed); // NUEVO: clampeamos al máximo
 
-        float speedTotal = onIceFloor ? currentSpeed * iceSpeedMultiplier : currentSpeed;
+        float speedTotal = onIceFloor
+            ? currentSpeed * iceSpeedMultiplier
+            : currentSpeed;
 
-        // Movimiento constante hacia la derecha
-        rb.linearVelocity = new Vector2(speedTotal, rb.linearVelocity.y);
+        // ðŸ”’ Clamp de velocidad mÃ¡xima (Unity 6)
+        float clampedX = Mathf.Clamp(speedTotal, -maxSpeed, maxSpeed);
+
+        rb.linearVelocity = new Vector2(clampedX, rb.linearVelocity.y);
 
         if (jump && isWallSliding)
-        {
             WallJump();
-        }
+
         jump = false;
     }
 
@@ -61,7 +66,10 @@ public class Movement : MonoBehaviour
         if (isTouchingWall && rb.linearVelocity.y < 0)
         {
             isWallSliding = true;
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, -wallSlideSpeed);
+            rb.linearVelocity = new Vector2(
+                rb.linearVelocity.x,
+                -wallSlideSpeed
+            );
         }
         else
         {
@@ -71,7 +79,8 @@ public class Movement : MonoBehaviour
 
     private void WallJump()
     {
-        rb.linearVelocity = new Vector2(-baseSpeed, wallJumpForce);
+        float jumpX = Mathf.Clamp(-baseSpeed, -maxSpeed, maxSpeed);
+        rb.linearVelocity = new Vector2(jumpX, wallJumpForce);
         isWallSliding = false;
     }
 
@@ -79,6 +88,7 @@ public class Movement : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("iceFloor"))
             onIceFloor = true;
+
         if (collision.gameObject.CompareTag("Wall"))
             isTouchingWall = true;
     }
@@ -87,6 +97,7 @@ public class Movement : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("iceFloor"))
             onIceFloor = false;
+
         if (collision.gameObject.CompareTag("Wall"))
             isTouchingWall = false;
     }
