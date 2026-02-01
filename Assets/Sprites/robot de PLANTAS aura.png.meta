@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      robot de PLANTAS aura_0: 8694625507730326629
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

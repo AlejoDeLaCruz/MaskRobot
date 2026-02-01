@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      DivisionTuberia_0: 4664829443852272764
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

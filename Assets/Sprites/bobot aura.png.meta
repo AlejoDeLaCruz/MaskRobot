@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      bobot aura_0: 5986225913893278759
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

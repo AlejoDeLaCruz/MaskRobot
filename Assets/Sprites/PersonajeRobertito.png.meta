@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      PersonajeRobertito_0: -605125566426416664
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
