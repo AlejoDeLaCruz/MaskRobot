@@ -1042,9 +1042,9 @@ MonoBehaviour:
   leftArrow: {fileID: 0}
   rightArrow: {fileID: 0}
   selectedScale: 1.7
-  deselectedScale: 1.5
-  deselectedAlpha: 0.866
-  desaturateAmount: 0.412
+  deselectedScale: 1.4
+  deselectedAlpha: 0.505
+  desaturateAmount: 0.423
 --- !u!4 &1226088728
 Transform:
   m_ObjectHideFlags: 0
