@@ -1913,6 +1913,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   totalMasks: 3
   startMaskIndex: 0
+  maskChangeSound: {fileID: 8300000, guid: 8f914ab4bad626d4e90e4a91e4d8178c, type: 3}
+  soundVolume: 1
 --- !u!95 &1894515569
 Animator:
   serializedVersion: 7
